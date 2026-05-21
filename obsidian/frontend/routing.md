@@ -25,13 +25,27 @@ export default function Home() {
 }
 ```
 
-All layout and UI logic lives in `src/views/home.tsx` (`HomeView`).
+All layout and UI logic lives in `src/views/home.tsx` (`HomeView`). The view is
+a **Server Component**; client-only animation is isolated in a leaf
+(`views/home-showcase.tsx`) — see [[component-conventions]] hard rule #6.
 
 ## Current routes
 
 | Route | File | View |
 |-------|------|------|
 | `/` | `src/app/page.tsx` | `views/home.tsx` → `HomeView` |
+
+## Special files
+
+`src/app/` carries the App Router special files:
+
+| File | Role |
+|------|------|
+| `layout.tsx` | Root layout — provider tree, font, `metadata` + `viewport`, JSON-LD |
+| `loading.tsx` | Suspense fallback — its presence enables streaming |
+| `error.tsx` | Route-segment error boundary (Client Component) |
+| `not-found.tsx` | 404 page — served with a 404 status |
+| `robots.ts` / `sitemap.ts` | Generate `/robots.txt` and `/sitemap.xml` — see [[seo-metadata]] |
 
 ## Adding a route
 
@@ -43,8 +57,9 @@ All layout and UI logic lives in `src/views/home.tsx` (`HomeView`).
 ## Layouts
 
 - `src/app/layout.tsx` — the **root layout**. Holds the provider tree
-  (`ScrollLayout` → `Cookie` → children), loads the Onest font and `globals.css`,
-  and sets metadata. See [[data-flow]].
+  (`ScrollLayout` → `AdaptiveGrid` / `ReducedMotion` / `Cookie` → children),
+  loads the Onest font and `globals.css`, exports `metadata` + `viewport`, and
+  renders the JSON-LD script. See [[data-flow]].
 - Reusable layout *wrappers* (not route layouts) live in `src/layouts/` —
   e.g. [[smooth-scroll|ScrollLayout]].
 

@@ -81,6 +81,14 @@ Mount it once. Props: `baseWidth` (defaults to the largest breakpoint) and
 > `common/` — see [[decisions-log]] ADR-0008. `styled-components` is **not** a
 > project dependency; the scale-down CSS lives in `globals.css` per [[design-system]].
 
+## ReducedMotion — `reduced-motion.tsx`
+
+`<ReducedMotion>` — a client leaf that calls react-spring's `useReducedMotion()`.
+It watches the `prefers-reduced-motion` media query and toggles react-spring's
+global `skipAnimation`, so every spring — and `spring-text-engine` — jumps to its
+end state instead of animating. Renders `null`; mounted once in the root layout.
+See [[animation-system]] and [[seo-metadata]].
+
 ## Skeleton loaders
 
 Three skeleton components for `loading` states of async-data components — every

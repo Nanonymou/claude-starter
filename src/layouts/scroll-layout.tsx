@@ -41,13 +41,17 @@ function ScrollController() {
     (window as typeof window & { lenis: Lenis }).lenis = lenis;
     setLenis(lenis);
 
+    let rafId = 0;
     const raf = (time: number) => {
-      lenis?.raf(time);
-      requestAnimationFrame(raf);
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
     };
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      // Cancel the loop before destroying Lenis — otherwise it keeps calling
+      // `raf` on a destroyed instance after unmount/HMR.
+      cancelAnimationFrame(rafId);
       lenis.destroy();
       setLenis(null);
     };

@@ -41,7 +41,13 @@ used internally by the scroll/animation system. Marked `@ts-nocheck`. `#do-not-m
 
 ## `seo/generate-page-metadata.ts`
 
-`generateMetadata(props)` — the shared page-metadata builder. See [[seo-metadata]].
+`generateMetadata(props?)` — shared page-`Metadata` builder. `generateViewport()`
+— the `Viewport` export (carries `themeColor`). See [[seo-metadata]].
+
+## `seo/structured-data.ts`
+
+`getSiteStructuredData()` — builds the `Organization` + `WebSite` JSON-LD graph
+rendered by the root layout. See [[seo-metadata]].
 
 ## Adding a util
 

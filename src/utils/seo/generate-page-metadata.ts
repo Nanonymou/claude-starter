@@ -1,76 +1,58 @@
 /**
- * @fileoverview Utility function to generate standardized metadata for pages
+ * @fileoverview Standardised metadata + viewport generators for pages.
  *
- * This function generates metadata for Next.js pages including:
- * 1. Basic meta tags (title, description, keywords)
- * 2. OpenGraph metadata for social sharing
- * 3. Twitter card metadata
- * 4. Canonical URL and alternates
- * 5. Author and publisher information
+ * `generateMetadata` builds a Next.js `Metadata` object — basic meta tags,
+ * OpenGraph, Twitter cards, canonical URL, icons, robots. `metadataBase` is
+ * always set (from `siteConfig`) so relative URLs (OG image, canonical)
+ * resolve to absolute — required by social scrapers.
  *
- * @param {MetadataProps} props - Configuration object containing:
- *   - title: Page title
- *   - description: Page description
- *   - keywords: Meta keywords
- *   - url: Canonical URL
- *   - ogImage: OpenGraph image URL
- *   - twitterHandle: Twitter username
- *   - author: Content author
- *   - themeColor: Theme color
- *   - siteName: Site name
- *
- * @returns {Metadata} Next.js Metadata object with configured meta tags
+ * `generateViewport` builds the `Viewport` export. `themeColor` lives here, not
+ * in `Metadata` — Next deprecated it on the metadata object.
  */
 
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
+
+import { siteConfig } from "@/lib/site";
 
 interface MetadataProps {
   title?: string;
   description?: string;
-  keywords?: string;
+  /** Canonical path (e.g. `/about`) or absolute URL for this page. */
   url?: string;
+  /** Open Graph / Twitter image — path under `public/` or absolute URL. */
   ogImage?: string;
   twitterHandle?: string;
   author?: string;
-  themeColor?: string;
   siteName?: string;
 }
 
 export function generateMetadata({
-  title = "New Project",
-  description = "New Project",
-  keywords = "New Project",
-  url = "",
-  ogImage = "/open-graph.png",
-  twitterHandle = "@newproject",
-  author = "New Project",
-  themeColor = "#000",
-  siteName = "New Project",
-}: MetadataProps): Metadata {
+  title = siteConfig.name,
+  description = siteConfig.description,
+  url = "/",
+  ogImage = siteConfig.ogImage,
+  twitterHandle = siteConfig.twitterHandle,
+  author = siteConfig.author,
+  siteName = siteConfig.name,
+}: MetadataProps = {}): Metadata {
   return {
+    // Resolves every relative URL below to an absolute one.
+    metadataBase: new URL(siteConfig.url),
     title,
     description,
-    keywords,
     authors: [{ name: author }],
     creator: author,
     publisher: author,
-    themeColor,
-    metadataBase: url ? new URL(url) : null,
     alternates: {
-      canonical: url || undefined,
+      canonical: url,
     },
     openGraph: {
       title,
       description,
-      url: url || undefined,
+      url,
       siteName,
-      images: [
-        {
-          url: ogImage,
-          width: 1080,
-          height: 720,
-        },
-      ],
+      // Dimensions must match the real asset; 1200×630 is the ideal size.
+      images: [{ url: ogImage, width: 900, height: 600 }],
       locale: "en_US",
       type: "website",
     },
@@ -97,9 +79,13 @@ export function generateMetadata({
       index: true,
       follow: true,
     },
-    other: {
-      distribution: "web",
-      language: "english",
-    },
+  };
+}
+
+export function generateViewport(): Viewport {
+  return {
+    themeColor: siteConfig.themeColor,
+    width: "device-width",
+    initialScale: 1,
   };
 }

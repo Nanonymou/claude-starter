@@ -10,6 +10,21 @@ This is a human-curated log — not a mirror of `git log`.
 
 ## 2026-05-21
 
+- **SEO & performance hardening** — a broad pass on the starter. **SEO:** new
+  `src/lib/site.ts` config (single source of truth, fed by `NEXT_PUBLIC_SITE_URL`);
+  `metadataBase` is now always set (relative OG/canonical URLs resolve);
+  `themeColor` moved to a `viewport` export; added `app/robots.ts`,
+  `app/sitemap.ts`, and an `Organization`+`WebSite` JSON-LD helper; OG image
+  dimensions corrected to match the asset; dead `keywords`/`other` tags dropped.
+  **Performance:** populated `next.config.ts` (`removeConsole` in prod,
+  AVIF/WebP, `next/image` breakpoints aligned to the grid, `poweredByHeader:
+  false`); fixed a `requestAnimationFrame` leak in `ScrollLayout` (Lenis loop
+  never cancelled on unmount); `HomeView` is now a Server Component with the
+  animation demo split into the `HomeShowcase` client leaf; added
+  `<ReducedMotion>` (honours `prefers-reduced-motion` via react-spring's global
+  `skipAnimation`); removed a per-frame `console.log` from the demo; added
+  `app/loading.tsx` / `error.tsx` / `not-found.tsx`. See [[decisions-log]]
+  ADR-0010, [[seo-metadata]], and [[environment-variables]].
 - **Animation engine — lint pass** — cleared all 13 pre-existing ESLint problems
   in the engine (2 errors + 11 warnings), an authorized engine edit (ADR-0009).
   `isMobileDisabled` now takes an optional `viewportWidth` argument, so the

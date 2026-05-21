@@ -10,6 +10,48 @@ consequences. Use [[templates/adr-note]] for new entries. Newest first.
 
 ---
 
+## ADR-0010 — SEO & performance hardening
+
+- **Status:** Accepted
+- **Date:** 2026-05-21
+
+**Context.** A review found gaps that would hurt a production marketing site:
+`metadataBase` defaulted to `null` (relative OG/canonical URLs never resolved to
+absolute — broken social previews); `themeColor` sat on the deprecated metadata
+field; there was no `robots.txt`, `sitemap.xml`, or structured data; the
+`next.config.ts` was empty; `ScrollLayout` leaked a `requestAnimationFrame`
+loop; the home view was a top-level `"use client"` (violating hard rule #6);
+and the animation-heavy starter ignored `prefers-reduced-motion`.
+
+**Decision.**
+- **Site config.** `src/lib/site.ts` (`siteConfig`) is the single source of
+  truth for SEO, fed by `NEXT_PUBLIC_SITE_URL` (fallback `http://localhost:3000`).
+- **Metadata.** `metadataBase` is always set; `themeColor` moved to a
+  `generateViewport()` / `viewport` export; dead `keywords` / `other` tags
+  dropped; OG dimensions corrected to match the asset.
+- **Crawlability.** Added `app/robots.ts`, `app/sitemap.ts`, and a JSON-LD
+  `Organization`+`WebSite` helper rendered once in the root layout.
+- **App Router files.** Added `loading.tsx` (enables streaming), `error.tsx`,
+  `not-found.tsx`.
+- **Rendering.** `HomeView` is a Server Component; client-only animation moved
+  to the `HomeShowcase` leaf — models hard rule #6 instead of breaking it.
+- **Reduced motion.** `<ReducedMotion>` calls react-spring's `useReducedMotion`,
+  toggling the global `skipAnimation` — one app-root mount covers every spring
+  and `spring-text-engine`. Chosen over per-component handling for its reach.
+- **Build config.** `next.config.ts` now sets `removeConsole` (prod),
+  AVIF/WebP, `next/image` breakpoints aligned to the adaptive-grid widths, and
+  `poweredByHeader: false`. React Compiler is left as a documented opt-in (needs
+  `babel-plugin-react-compiler`).
+- Fixed the `ScrollLayout` Lenis rAF leak (cancel on unmount).
+
+**Consequences.** Social/SEO metadata is correct in production once
+`NEXT_PUBLIC_SITE_URL` is set. The first project env var now exists (see
+[[environment-variables]]). `isBot()` stays available but is discouraged — it
+opts routes out of static rendering; reduced-motion is the preferred lever (see
+[[seo-metadata]]). React Compiler remains opt-in pending a dependency install.
+
+---
+
 ## ADR-0009 — Shared animation ticker; authorized engine performance refactor
 
 - **Status:** Accepted

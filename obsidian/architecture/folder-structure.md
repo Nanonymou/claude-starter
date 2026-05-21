@@ -35,18 +35,24 @@ src/
 ├── app/                    # Next.js routes — keep lean, routing only
 │   ├── layout.tsx          # Root layout — provider tree lives here
 │   ├── page.tsx            # Route → delegates to a view
+│   ├── loading.tsx         # Suspense fallback (enables streaming)
+│   ├── error.tsx           # Route-segment error boundary
+│   ├── not-found.tsx       # 404 page
+│   ├── robots.ts           # → /robots.txt
+│   ├── sitemap.ts          # → /sitemap.xml
 │   ├── globals.css         # Tailwind v4 config + design tokens
 │   └── favicon.ico
 │
 ├── views/                  # Page-level components — one per route
-│   └── home.tsx            # HomeView (demo)
+│   ├── home.tsx            # HomeView (Server Component, demo)
+│   └── home-showcase.tsx   # HomeShowcase — client animation leaf
 │
 ├── layouts/                # Reusable layout wrappers
 │   └── scroll-layout.tsx   # Lenis smooth-scroll wrapper
 │
 ├── components/
 │   ├── ui/                 # Design-system primitives (Button, Input…) — empty, add as needed
-│   ├── common/             # Shared infrastructure (Cookie, grid, Skeletons)
+│   ├── common/             # Shared infrastructure (Cookie, grid, ReducedMotion, Skeletons)
 │   └── animation/springs/  # ⚠️ Animation engine — #do-not-modify
 │
 ├── hooks/                  # Custom hooks, grouped by domain
@@ -56,11 +62,12 @@ src/
 │
 ├── lib/                    # Third-party client init / global config
 │   ├── animation/ticker.ts # Shared app-wide requestAnimationFrame loop
+│   ├── site.ts             # Site-wide SEO config (single source of truth)
 │   └── springs/config.ts   # Global animation config
 │
 ├── utils/                  # Pure utility functions (no side effects)
 │   ├── animation/coords.ts
-│   ├── seo/generate-page-metadata.ts
+│   ├── seo/generate-page-metadata.ts · seo/structured-data.ts
 │   ├── is-bot.ts · lvh.ts · math.ts · scroll-to.ts
 │
 ├── types/                  # Shared TypeScript types

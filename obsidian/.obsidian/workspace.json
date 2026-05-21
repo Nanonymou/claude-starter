@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "20bf5e8035aaf949",
+        "id": "b5664c6f25ce0b95",
         "type": "tabs",
         "children": [
           {
-            "id": "a8302c3faa64a88d",
+            "id": "d182979a4375c5e4",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "frontend/components/animation-springs.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "animation-springs"
             }
           }
         ]
@@ -90,7 +94,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 274.5,
+    "collapsed": true
   },
   "right": {
     "id": "3841609c3bc8d4d1",
@@ -197,6 +202,8 @@
   },
   "active": "d95fd1b3db653737",
   "lastOpenFiles": [
+    "frontend/components/animation-springs.md",
+    "frontend/routing.md",
     "01-architecture/tech-stack.md.tmp.53512.ae20e18f20e7",
     "01-architecture/environment-variables.md",
     "02-frontend/text-engine-reference.md",
