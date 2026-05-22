@@ -1,12 +1,57 @@
 ---
 tags: [meta, decision]
-updated: 2026-05-21
+updated: 2026-05-22
 ---
 
 # Decisions Log (ADRs)
 
 Architecture Decision Records. Each entry captures a choice, its context, and its
 consequences. Use [[templates/adr-note]] for new entries. Newest first.
+
+---
+
+## ADR-0012 — Styling lives in utilities and components, not `globals.css`
+
+- **Status:** Accepted
+- **Date:** 2026-05-22
+
+**Context.** ADR-0004 made design tokens the styling currency and ruled that
+"new values must be added to `globals.css` first." Combined with the
+design-system guidance to *"extract repeated multi-class patterns to
+`@layer components`"*, the path of least resistance for any repeated visual
+pattern became a named class in `globals.css`. On an animation-heavy,
+multi-section marketing site that grows the file without bound — a single
+global stylesheet accumulating hundreds of component-specific classes that are
+never deleted when their component is. The fix is a placement rule, not a
+file-splitting trick: splitting `globals.css` into many files only spreads the
+same bloat.
+
+**Decision.** Styling follows a strict placement order; `globals.css` stays
+bounded by design.
+
+- One-off styling → **Tailwind utilities** in `className`. Nothing enters CSS.
+- A repeated pattern with markup/structure/props → a **React component**
+  (`components/ui/`), *not* a CSS class. This is the default answer to "this
+  looks repeated" — e.g. an eyebrow label with a `::before` dot is an
+  `<Eyebrow>` component, not a `.label-eyebrow` class.
+- A repeated pure-utility combo with no structure → a Tailwind v4 `@utility`.
+- `@layer components` is reserved **strictly** for what utilities and
+  components genuinely cannot express: pseudo-elements (`::before`/`::after`),
+  third-party DOM overrides (`!important` on library markup), complex
+  descendant/state selectors.
+- `globals.css` only ever holds: `@import`, tokens (`:root` + `@theme`), base
+  element resets (`@layer base`), and the narrow `@layer components`
+  exceptions above. If it grows past that, something was misplaced.
+- CSS Modules were considered and **rejected** — a second styling mechanism
+  for the rare bespoke-CSS case is not worth the extra mental model when
+  motion is spring-based (no keyframes — ADR-0002) and utilities + components
+  cover everything else.
+
+**Consequences.** `globals.css` stays a few-hundred-line file indefinitely.
+"Repeated thing" pressure now pushes toward React components — which the
+project wants anyway. This **amends ADR-0004**: design *tokens* still go in
+`globals.css` first, but component-specific *classes* no longer do.
+[[design-system]] and [[component-conventions]] updated to match.
 
 ---
 

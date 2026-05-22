@@ -1,6 +1,6 @@
 ---
 tags: [frontend, design-system, stable]
-updated: 2026-05-21
+updated: 2026-05-22
 ---
 
 # Design System — Tailwind v4
@@ -53,9 +53,31 @@ Every custom style goes inside a layer — never outside one:
 
 ```css
 @layer base {        /* element resets & defaults: h1, p, a … */ }
-@layer components {  /* reusable multi-utility patterns: .card … */ }
+@layer components {  /* pseudo-elements & 3rd-party overrides only — see below */ }
 @layer utilities {   /* single-purpose helpers: .scrollbar-none … */ }
 ```
+
+## Where a style goes (ADR-0012)
+
+`globals.css` is **not** a place to park component styles — it holds tokens and
+base resets and stays a few hundred lines forever. Follow this order; the first
+match wins:
+
+| Situation | Goes where |
+|-----------|-----------|
+| One-off styling | Tailwind utilities in `className` — nothing in CSS |
+| Repeated pattern with markup / structure / props | a **React component** in `components/ui/` |
+| Repeated *pure-utility* combo, no structure | a Tailwind v4 `@utility` |
+| Pseudo-elements, 3rd-party DOM overrides, complex selectors | `@layer components` — the genuine exceptions |
+| A new colour / spacing / radius value | a **token** in `:root` + `@theme` |
+
+> [!important] The default answer to "this looks repeated" is a **React
+> component**, not a CSS class. An eyebrow label with a `::before` dot is an
+> `<Eyebrow>` component — not a `.label-eyebrow` global class. `@layer
+> components` is for what utilities and components genuinely *cannot* express.
+
+There are **no CSS Modules** in this project — utilities + components cover
+every case (motion is spring-based, so there are no keyframes to co-locate).
 
 ## Current theme state
 
@@ -71,7 +93,8 @@ Loaded in `src/app/layout.tsx` and exposed on `<body>` as `--font-onest`.
 ## Styling rules
 
 - Use utilities in JSX `className`; keep class strings short and readable.
-- Extract repeated multi-class patterns to `@layer components` or a shared component.
+- Extract a repeated pattern to a **React component** — not a `@layer
+  components` class. See *Where a style goes* above (ADR-0012).
 - Mobile-first responsive: `sm:` / `md:` / `lg:` / `xl:` prefixes.
 - Dark mode: `dark:` prefix or token overrides in a `prefers-color-scheme` block.
 - No inline `style` except for dynamic values (e.g. spring-animated values).

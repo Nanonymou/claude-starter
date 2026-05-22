@@ -1,6 +1,6 @@
 ---
 tags: [frontend, stable]
-updated: 2026-05-21
+updated: 2026-05-22
 ---
 
 # Component Conventions
@@ -30,6 +30,10 @@ See [[folder-structure]] for the full tree.
 - Never mark a layout/page `"use client"` to dodge a boundary — split a leaf
   client wrapper instead.
 - Keep components focused and under ~150 lines; split when they grow.
+- A repeated visual pattern becomes a **React component**, not a global CSS
+  class — `@layer components` in `globals.css` is reserved for pseudo-elements
+  and third-party overrides. See [[design-system]] *Where a style goes*
+  (ADR-0012).
 
 ## Data rules
 

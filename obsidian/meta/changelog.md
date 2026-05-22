@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-05-21
+updated: 2026-05-22
 ---
 
 # Changelog
@@ -10,6 +10,14 @@ This is a human-curated log — not a mirror of `git log`.
 
 ## 2026-05-22
 
+- **Styling-placement convention added** — to stop `globals.css` accumulating
+  hundreds of component-specific classes, styling now follows a strict
+  placement order: one-offs are Tailwind utilities, repeated patterns become
+  **React components** (not `@layer components` classes), and `@layer
+  components` is reserved strictly for pseudo-elements and third-party
+  overrides. `globals.css` stays bounded — `@import`, tokens, base resets only.
+  No CSS Modules. Codified in [[decisions-log]] ADR-0012; [[design-system]]
+  (new *Where a style goes* section) and [[component-conventions]] updated.
 - **Semantic-HTML / SEO-markup convention added** — new [[html-semantics]]
   rulebook: landmarks, one `<h1>` + heading outline, native elements over
   `div`s, forms/images/ARIA, JSON-LD over microdata, a `data-*` convention, and
