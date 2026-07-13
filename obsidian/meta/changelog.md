@@ -1,12 +1,23 @@
 ---
 tags: [meta, changelog]
-updated: 2026-06-07
+updated: 2026-07-13
 ---
 
 # Changelog
 
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
+
+## 2026-07-13
+
+- **Standalone `index.html` added at the repo root** — a self-contained,
+  single-file recreation of the "Lumora — Independent Design & Engineering
+  Studio" landing page (pure HTML/CSS/JS, no build step). It deliberately does
+  **not** use the Next.js app, the vendored spring engine, or Tailwind: the
+  only dependency is Lenis, loaded via a CDN importmap; spring/text reveals are
+  reproduced with CSS transitions and a canvas-based "liquid" cursor-reveal
+  hero. It is not wired into `src/` or the App Router and does not affect
+  `yarn dev`/`yarn build`.
 
 ## 2026-06-07
 
