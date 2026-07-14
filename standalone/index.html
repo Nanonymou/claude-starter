@@ -524,8 +524,8 @@
     <!-- ============ Hero ============ -->
     <section id="home" class="hero">
       <div class="liquid" id="liquid">
-        <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/lumora-e8b711fc68/hero/after.jpg"
-             alt="Lumora studio — hero visual" fetchpriority="high" />
+        <img id="heroBase" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%23c9c9c9'/%3E%3C/svg%3E"
+             alt="QHSE Digital Hub — typographic hero" fetchpriority="high" />
         <canvas aria-hidden="true" id="liquidCanvas"></canvas>
       </div>
       <div class="hero-vignette"></div>
@@ -803,6 +803,10 @@
     const SITE = {
       brand: 'QHSE Digital Hub',
       watermark: 'QHSE',
+      /* Typographic hero art (alche.studio-style editorial type), generated
+         as inline SVG: `lines` render stacked; outline on the light base
+         layer, accent-filled on the dark cursor-reveal layer. */
+      heroArt: { lines: ['QHSE', 'DIGITAL', 'HUB'] },
       tagline: 'Digital Hub Servers , for QHSE Team.',
       nav: [
         { label: 'Home',     target: 'home', current: true },
@@ -863,7 +867,7 @@
           { value: 11, suffix: '', label: 'Projects delivered' },
           { value: 98,  suffix: '%', label: 'Client retention' },
           { value: 16,  suffix: '+',  label: 'QHSE Members' },
-          { value: 3.000.000,  suffix: '+', label: 'Manhours and continue' }
+          { value: 3000000, suffix: '+', label: 'Manhours and continue' }
         ]
       },
       footer: {
@@ -958,6 +962,38 @@
     }
     renderContent();
 
+    /* ============ Typographic hero art (SVG data URIs) ============ */
+    function makeHeroArt(art){
+      const W = 1920, H = 1080, SIZE = 280, LEAD = 290, TOP = 330;
+      const textLines = art.lines.map((l, i) =>
+        `<text x="${W / 2}" y="${TOP + i * LEAD}">${esc(l)}</text>`).join('');
+      const type = `font-family="'Onest','Helvetica Neue',Arial,sans-serif" font-weight="700" text-anchor="middle" letter-spacing="-6" font-size="${SIZE}"`;
+      const base =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">` +
+        `<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">` +
+        `<stop offset="0" stop-color="#ecebe9"/><stop offset="1" stop-color="#c9c9c9"/></linearGradient></defs>` +
+        `<rect width="${W}" height="${H}" fill="url(#g)"/>` +
+        `<g ${type} fill="none" stroke="rgba(17,17,17,0.16)" stroke-width="2.5">${textLines}</g>` +
+        `</svg>`;
+      const reveal =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">` +
+        `<defs>` +
+        `<radialGradient id="r" cx="0.5" cy="0.42" r="0.8">` +
+        `<stop offset="0" stop-color="#232323"/><stop offset="1" stop-color="#0a0a0a"/></radialGradient>` +
+        `<linearGradient id="a" x1="0" y1="0" x2="1" y2="1">` +
+        `<stop offset="0" stop-color="#cf8047"/><stop offset="1" stop-color="#97501f"/></linearGradient>` +
+        `</defs>` +
+        `<rect width="${W}" height="${H}" fill="url(#r)"/>` +
+        `<g ${type} fill="url(#a)">${textLines}</g>` +
+        `</svg>`;
+      const enc = s => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+      return { base: enc(base), reveal: enc(reveal) };
+    }
+    const HERO_ART = makeHeroArt(SITE.heroArt);
+    const heroBase = document.getElementById('heroBase');
+    heroBase.src = HERO_ART.base;
+    heroBase.alt = SITE.brand + ' — typographic hero';
+
     /* ============ Word-reveal splitting ============ */
     document.querySelectorAll('.words').forEach(root => {
       let wordIndex = 0;
@@ -1046,7 +1082,7 @@
     /* ============ LiquidReveal ============ */
     (function initLiquid(){
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const AFTER_SRC = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/lumora-e8b711fc68/hero/before.jpg';
+      const AFTER_SRC = HERO_ART.reveal;
       const wrap = document.getElementById('liquid');
       const canvas = document.getElementById('liquidCanvas');
       const ctx = canvas.getContext('2d');
@@ -1195,7 +1231,8 @@
         const startY = vh;                       /* top hits viewport bottom */
         const endY = vh / 2 - r.height / 2;      /* center hits viewport center */
         const p = Math.min(1, Math.max(0, (startY - r.top) / (startY - endY)));
-        el.textContent = Math.round(p * Number(el.dataset.value));
+        /* id-ID grouping renders large values like 3000000 as "3.000.000" */
+        el.textContent = Math.round(p * Number(el.dataset.value)).toLocaleString('id-ID');
       });
     }
     lenis.on('scroll', updateStats);
