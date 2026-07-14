@@ -16,6 +16,11 @@ This is a human-curated log — not a mirror of `git log`.
   overlays (nav menu, request modal) now manage keyboard focus properly:
   focus moves into the dialog on open, Tab/Shift-Tab are trapped inside it,
   and focus is restored to the triggering control on close.
+- **Standalone `index.html` — request form validation fixed** — runtime
+  verification caught that the request form carried `novalidate`, which let a
+  completely empty submit reach the success state despite every field being
+  `required`. Removed `novalidate` so native browser validation blocks
+  empty/partial/malformed submissions with the standard messages.
 
 ## 2026-07-13
 
