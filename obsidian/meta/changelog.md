@@ -15,7 +15,9 @@ This is a human-curated log — not a mirror of `git log`.
   can never leave a counter short of its target, and both `aria-modal`
   overlays (nav menu, request modal) now manage keyboard focus properly:
   focus moves into the dialog on open, Tab/Shift-Tab are trapped inside it,
-  and focus is restored to the triggering control on close.
+  and focus is restored to the triggering control on close — for the modal,
+  only after its closing transition completes and the dialog is hidden
+  (second review pass), matching the menu's sequence.
 - **Standalone `index.html` — rebranded to "QHSE Digital Hub" + content
   centralised** — all page copy now lives in a single `SITE` config object at
   the top of the module script (brand, watermark, nav, hero, carousel, about,
