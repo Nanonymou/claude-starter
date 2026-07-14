@@ -288,15 +288,19 @@
       padding:1.5rem; color:#fff; box-shadow:0 0 0 1px rgba(255,255,255,.05);
       transition:transform .45s var(--e-out) }
     @media (min-width:640px){ .pf-card{ min-height:26rem; padding:2rem } }
-    .pf-meta{ display:flex; align-items:flex-start; justify-content:space-between; font-size:.75rem;
-      text-transform:uppercase; letter-spacing:.025em; color:rgba(255,255,255,.45) }
+    .pf-img{ position:absolute; inset:0; z-index:1; width:100%; height:100%; object-fit:cover;
+      object-position:top center; border-radius:2rem }
+    .pf-shade{ position:absolute; inset:0; z-index:1; pointer-events:none;
+      background:linear-gradient(to bottom, rgba(10,10,10,.32), rgba(10,10,10,.18) 42%, rgba(10,10,10,.93) 100%) }
+    .pf-meta{ position:relative; z-index:2; display:flex; align-items:flex-start; justify-content:space-between;
+      font-size:.75rem; text-transform:uppercase; letter-spacing:.025em; color:rgba(255,255,255,.6) }
     .pf-badge{ width:2.75rem; height:2.75rem; display:grid; place-items:center; border-radius:9999px;
       background:rgba(255,255,255,.1); color:#fff; box-shadow:0 0 0 1px rgba(255,255,255,.15);
       transition:transform .35s var(--e-snap) }
     .pf-wm{ position:absolute; inset:0; display:grid; place-items:center; pointer-events:none }
     .pf-wm .i{ font-size:4.5rem; color:rgba(255,255,255,.9) }
     .pf-wm sup{ font-size:.75rem; color:rgba(255,255,255,.6) }
-    .pf-body{ position:absolute; inset-inline:1.5rem; bottom:1.5rem }
+    .pf-body{ position:absolute; inset-inline:1.5rem; bottom:1.5rem; z-index:2 }
     @media (min-width:640px){ .pf-body{ inset-inline:2rem; bottom:2rem } }
     .pf-body h3{ font-size:1.5rem; font-weight:500; letter-spacing:-.01em }
     @media (min-width:640px){ .pf-body h3{ font-size:1.875rem } }
@@ -850,10 +854,22 @@
         eyebrow: 'Server service',
         heading: 'Selected Work',
         items: [
-          { name: 'Data Server', category: 'System', year: '2026', desc: 'A digital data server tracker for QHSE Team', tags: ['WebApp', 'Server', 'G-Script'] },
-          { name: 'MeetSense', category: 'System',  year: '2026', desc: 'A digital virtual meeting attendance system.', tags: ['WebApp', 'Server', 'G-Script'] },
-          { name: 'Training Hub', category: 'System', year: '2026', desc: 'A digital server for all training modules.', tags: ['WebApp', 'Server','All Platform'] },
-          { name: 'HR Tracker', category: 'Mobile',   year: '2026', desc: 'A digital server tracking BPJS & MCU.', tags: ['Mobile App', 'UX Research', 'Development'] }
+          { name: 'Data Server', category: 'System', year: '2026',
+            desc: 'A digital data server tracker for QHSE Team', tags: ['WebApp', 'Server', 'G-Script'],
+            img: 'assets/portfolio/data-server.png',
+            href: 'https://script.google.com/macros/s/AKfycbxutZ7nbSRj_1YXd6BaGLv2_6rk5x0cuTa7q-g63vWgR1J0Y0A_mRhBVu6h5OBZ9Wimvg/exec' },
+          { name: 'MeetSense', category: 'System', year: '2026',
+            desc: 'A digital virtual meeting attendance system.', tags: ['WebApp', 'Server', 'G-Script'],
+            img: 'assets/portfolio/meetsense.png',
+            href: 'https://script.google.com/macros/s/AKfycbxKN6L3-rWMTLmGKYTMmKjF8JzsdXAW2Gzz4sX3EAG1BxHUtT5lR3BTCVkikf7MrByo/exec' },
+          { name: 'Training Hub', category: 'System', year: '2026',
+            desc: 'A digital server for all training modules.', tags: ['WebApp', 'Server', 'All Platform'],
+            img: 'assets/portfolio/training-hub.png',
+            href: 'https://zip-file-extraction-4s4v.bolt.host/' },
+          { name: 'HR Tracker', category: 'Mobile', year: '2026',
+            desc: 'A digital server tracking BPJS & MCU.', tags: ['Mobile App', 'UX Research', 'Development'],
+            img: 'assets/portfolio/hr-tracker.png',
+            href: 'https://script.google.com/macros/s/AKfycbydblqreRLk150pqURfQOwAaWs47Wpn74OHZpwTBvpUJprGrWzzcPbzcvpC7D4JrWe-/exec' }
         ]
       },
       services: {
@@ -940,9 +956,10 @@
       ).join('');
 
       document.getElementById('pfGrid').innerHTML = SITE.portfolio.items.map((it, i) =>
-        `<li class="rv" style="--d:${i * 90}ms"><a href="#works" data-stub><article class="pf-card">
-          <div class="pf-meta"><span>${esc(it.category)} — ${esc(it.year)}</span><span class="pf-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+        `<li class="rv" style="--d:${i * 90}ms"><a href="${esc(it.href || '#works')}"${it.href ? ' target="_blank" rel="noopener noreferrer"' : ' data-stub'}><article class="pf-card">
           <div class="pf-wm"><span><svg class="i"><use href="#i-logo"/></svg><sup>®</sup></span></div>
+          ${it.img ? `<img class="pf-img" src="${esc(it.img)}" alt="${esc(it.name)} preview" loading="lazy" onerror="this.nextElementSibling.remove();this.remove()"/><div class="pf-shade"></div>` : ''}
+          <div class="pf-meta"><span>${esc(it.category)} — ${esc(it.year)}</span><span class="pf-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
           <div class="pf-body"><h3>${esc(it.name)}</h3><p>${esc(it.desc)}</p>
             <div class="pf-tags">${it.tags.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div></div>
         </article></a></li>`
