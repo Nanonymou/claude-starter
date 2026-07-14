@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lumora — Independent Design &amp; Engineering Studio</title>
-  <meta name="description" content="Lumora is an independent studio crafting brands, products, and the systems that connect them — bold ideas, shipped with quiet precision." />
+  <title>QHSE Digital Hub — Independent Design &amp; Engineering Studio</title>
+  <meta name="description" content="QHSE Digital Hub is an independent studio crafting brands, products, and the systems that connect them — bold ideas, shipped with quiet precision." />
   <meta name="theme-color" content="#0a0a0a" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -487,8 +487,8 @@
   <!-- ============ PageLoader ============ -->
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader-center">
-      <div class="loader-brand"><svg class="i"><use href="#i-logo"/></svg>Lumora</div>
-      <p class="loader-tag">Bold ideas, shipped with quiet precision.</p>
+      <div class="loader-brand"><svg class="i"><use href="#i-logo"/></svg><span data-t="brand">QHSE Digital Hub</span></div>
+      <p class="loader-tag" data-t="tagline">Bold ideas, shipped with quiet precision.</p>
     </div>
     <div class="loader-progress">
       <div class="loader-track"><div class="loader-fill" id="loaderFill"></div></div>
@@ -499,18 +499,11 @@
   <!-- ============ Header ============ -->
   <header class="hdr rv" style="--ty:-14px; --d:150ms" data-gate>
     <div class="shell">
-      <button class="brand" data-nav="home" aria-label="Lumora — back to top">
-        <span class="brand-in"><svg class="i"><use href="#i-logo"/></svg>Lumora</span>
+      <button class="brand" data-nav="home" aria-label="Back to top">
+        <span class="brand-in"><svg class="i"><use href="#i-logo"/></svg><span data-t="brand">QHSE Digital Hub</span></span>
       </button>
       <nav class="hdr-nav" aria-label="Primary">
-        <ul>
-          <li><button data-nav="home" aria-current="page"><span class="nav-label">Home</span></button></li>
-          <li><button data-nav="works"><span class="nav-label">Work</span></button></li>
-          <li><button data-nav="services"><span class="nav-label">Services<span class="caret">▾</span></span></button></li>
-          <li><button data-nav="about"><span class="nav-label">Studio</span></button></li>
-          <li><button data-nav="careers"><span class="nav-label">Careers</span></button></li>
-          <li><button data-nav="contact"><span class="nav-label">Contact</span></button></li>
-        </ul>
+        <ul id="hdrNavList"></ul>
       </nav>
       <div class="hdr-right">
         <div class="clock-chip">
@@ -536,11 +529,11 @@
         <canvas aria-hidden="true" id="liquidCanvas"></canvas>
       </div>
       <div class="hero-vignette"></div>
-      <div class="hero-watermark rv" style="--d:300ms" data-gate aria-hidden="true">LUMORA</div>
+      <div class="hero-watermark rv" style="--d:300ms" data-gate aria-hidden="true" data-t="watermark">QHSE</div>
 
       <div class="shell hero-grid">
         <div class="hero-left">
-          <p class="eyebrow rv" style="--ty:10px; --d:200ms" data-gate>Independent Studio</p>
+          <p class="eyebrow rv" style="--ty:10px; --d:200ms" data-gate data-t="hero.eyebrow">Independent Studio</p>
           <h1 class="hero-h1 lines" data-gate>
             <span class="ln"><span style="--ld:250ms">Bold ideas,</span></span>
             <span class="ln"><span style="--ld:370ms">shipped with</span></span>
@@ -550,14 +543,14 @@
             <span class="hero-stars" aria-label="Five stars">
               <svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg>
             </span>
-            <p>200+ brands shipped</p>
+            <p data-t="hero.rating">200+ brands shipped</p>
           </div>
           <div class="hero-ctas rv" style="--ty:10px; --d:750ms" data-gate>
             <button class="pill has-arrow" data-nav="contact">
-              <span class="pill-in v-dark">Let&rsquo;s Talk<span class="pill-badge"><svg class="i"><use href="#i-arrow-r"/></svg></span></span>
+              <span class="pill-in v-dark"><span data-t="hero.ctaPrimary">Let&rsquo;s Talk</span><span class="pill-badge"><svg class="i"><use href="#i-arrow-r"/></svg></span></span>
             </button>
             <button class="pill has-arrow" data-nav="works">
-              <span class="pill-in v-outline">View Work<span class="pill-badge"><svg class="i"><use href="#i-arrow-r"/></svg></span></span>
+              <span class="pill-in v-outline"><span data-t="hero.ctaSecondary">View Work</span><span class="pill-badge"><svg class="i"><use href="#i-arrow-r"/></svg></span></span>
             </button>
           </div>
         </div>
@@ -569,9 +562,7 @@
               <div class="hc-panel">
                 <div class="hc-slot" id="hcSlot" aria-live="polite"></div>
                 <div class="hc-ctrl">
-                  <div class="hc-dots" id="hcDots">
-                    <span class="hc-dot active"></span><span class="hc-dot"></span><span class="hc-dot"></span>
-                  </div>
+                  <div class="hc-dots" id="hcDots"></div>
                   <div class="hc-btns">
                     <button class="hc-btn prev" id="hcPrev" aria-label="Previous"><svg class="i"><use href="#i-arrow-r"/></svg></button>
                     <button class="hc-btn next" id="hcNext" aria-label="Next"><svg class="i"><use href="#i-arrow-r"/></svg></button>
@@ -582,25 +573,17 @@
           </div>
 
           <div class="partners rv" style="--d:550ms" data-gate>
-            <p class="partners-lbl">Trusted by</p>
-            <ul>
-              <li><span class="partner"><svg class="i"><use href="#i-dot"/></svg>Kaido</span></li>
-              <li><span class="partner"><svg class="i"><use href="#i-dot"/></svg>Northpeak</span></li>
-              <li><span class="partner"><svg class="i"><use href="#i-dot"/></svg>Vellum</span></li>
-              <li><span class="partner"><svg class="i"><use href="#i-dot"/></svg>Orbit</span></li>
-              <li><span class="partner"><svg class="i"><use href="#i-dot"/></svg>Brightline</span></li>
-              <li><span class="partner"><svg class="i"><use href="#i-dot"/></svg>Cobalt</span></li>
-              <li><span class="partner"><svg class="i"><use href="#i-dot"/></svg>Mesa</span></li>
-            </ul>
+            <p class="partners-lbl" data-t="hero.trustedBy">Trusted by</p>
+            <ul id="partnersList"></ul>
           </div>
         </div>
       </div>
 
       <div class="hero-status">
         <div class="shell rv" style="--d:900ms" data-gate>
-          <span>Working since 2014</span>
-          <span class="mid">Remote-first, worldwide</span>
-          <span class="scroll-cue">Scroll to explore <span aria-hidden="true">↓</span></span>
+          <span data-t="hero.status.left">Working since 2014</span>
+          <span class="mid" data-t="hero.status.mid">Remote-first, worldwide</span>
+          <span class="scroll-cue"><span data-t="hero.status.right">Scroll to explore</span> <span aria-hidden="true">↓</span></span>
         </div>
       </div>
     </section>
@@ -610,17 +593,17 @@
       <div class="shell">
         <div class="about-globe">
           <svg class="i bg-globe" aria-hidden="true"><use href="#i-globe"/></svg>
-          <p class="eyebrow">The Studio</p>
+          <p class="eyebrow" data-t="about.eyebrow">The Studio</p>
           <div class="about-tz rv">
             <svg class="i"><use href="#i-globe"/></svg>
-            <span>A distributed team building across every time zone.</span>
+            <span data-t="about.timezone">A distributed team building across every time zone.</span>
           </div>
         </div>
         <div class="about-right">
-          <h2 class="about-h2 words">We partner with ambitious teams to ship <span class="muted-txt">digital products, brand systems, and the strategy that holds them together.</span></h2>
+          <h2 class="about-h2 words"><span data-t="about.statement1">We partner with ambitious teams to ship</span> <span class="muted-txt" data-t="about.statement2">digital products, brand systems, and the strategy that holds them together.</span></h2>
           <div class="about-foot rv" style="--d:200ms">
             <div>
-              <p class="about-find">Find us online</p>
+              <p class="about-find" data-t="about.findUs">Find us online</p>
               <div class="socials">
                 <a class="social x" href="#twitter" aria-label="X / Twitter"><svg class="i"><use href="#i-x"/></svg></a>
                 <a class="social" href="#behance" aria-label="Behance"><svg class="i"><use href="#i-dot"/></svg></a>
@@ -628,7 +611,7 @@
               </div>
             </div>
             <a class="pill has-arrow" href="#about">
-              <span class="pill-in v-outline">About Us<span class="pill-badge"><svg class="i"><use href="#i-arrow-r"/></svg></span></span>
+              <span class="pill-in v-outline"><span data-t="about.cta">About Us</span><span class="pill-badge"><svg class="i"><use href="#i-arrow-r"/></svg></span></span>
             </a>
           </div>
         </div>
@@ -638,10 +621,10 @@
     <!-- ============ CreateBand ============ -->
     <section class="create" aria-label="We build better">
       <ul class="shell">
-        <li class="rv" style="--d:0ms"><div class="create-tile v-light">We</div></li>
-        <li class="rv" style="--d:120ms"><div class="create-tile v-accent">Build</div></li>
+        <li class="rv" style="--d:0ms"><div class="create-tile v-light" data-t="create.a">We</div></li>
+        <li class="rv" style="--d:120ms"><div class="create-tile v-accent" data-t="create.b">Build</div></li>
         <li class="rv" style="--d:240ms"><div class="create-tile v-dark" aria-label="then"><svg class="i"><use href="#i-arrow-r"/></svg></div></li>
-        <li class="rv" style="--d:360ms"><div class="create-tile v-ghost">Better</div></li>
+        <li class="rv" style="--d:360ms"><div class="create-tile v-ghost" data-t="create.c">Better</div></li>
       </ul>
     </section>
 
@@ -649,117 +632,19 @@
     <section id="works" class="pf">
       <div class="shell">
         <div class="pf-head">
-          <p class="eyebrow boxed rv" style="--ty:10px">Portfolio</p>
-          <h2 class="pf-h2 lines"><span class="ln"><span style="--ld:120ms">Selected Work</span></span></h2>
+          <p class="eyebrow boxed rv" style="--ty:10px" data-t="portfolio.eyebrow">Portfolio</p>
+          <h2 class="pf-h2 lines"><span class="ln"><span style="--ld:120ms" data-t="portfolio.heading">Selected Work</span></span></h2>
         </div>
-        <ul class="pf-grid">
-          <li class="rv" style="--d:0ms">
-            <a href="#works" data-stub>
-              <article class="pf-card">
-                <div class="pf-meta">
-                  <span>Branding — 2025</span>
-                  <span class="pf-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span>
-                </div>
-                <div class="pf-wm"><span><svg class="i"><use href="#i-logo"/></svg><sup>®</sup></span></div>
-                <div class="pf-body">
-                  <h3>Aster Labs</h3>
-                  <p>A complete identity and go-to-market system for a fast-moving research startup.</p>
-                  <div class="pf-tags"><span class="chip">Branding</span><span class="chip">Strategy</span><span class="chip">Design</span></div>
-                </div>
-              </article>
-            </a>
-          </li>
-          <li class="rv" style="--d:90ms">
-            <a href="#works" data-stub>
-              <article class="pf-card">
-                <div class="pf-meta">
-                  <span>Product — 2024</span>
-                  <span class="pf-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span>
-                </div>
-                <div class="pf-wm"><span><svg class="i"><use href="#i-logo"/></svg><sup>®</sup></span></div>
-                <div class="pf-body">
-                  <h3>Nova Finance</h3>
-                  <p>A finance platform reimagined — clear data, calm interfaces, and effortless flows.</p>
-                  <div class="pf-tags"><span class="chip">Product Design</span><span class="chip">Web App</span><span class="chip">QA</span></div>
-                </div>
-              </article>
-            </a>
-          </li>
-          <li class="rv" style="--d:180ms">
-            <a href="#works" data-stub>
-              <article class="pf-card">
-                <div class="pf-meta">
-                  <span>Identity — 2023</span>
-                  <span class="pf-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span>
-                </div>
-                <div class="pf-wm"><span><svg class="i"><use href="#i-logo"/></svg><sup>®</sup></span></div>
-                <div class="pf-body">
-                  <h3>Helio Studio</h3>
-                  <p>A bold visual identity and art direction system built to scale across every surface.</p>
-                  <div class="pf-tags"><span class="chip">Brand Identity</span><span class="chip">Art Direction</span></div>
-                </div>
-              </article>
-            </a>
-          </li>
-          <li class="rv" style="--d:270ms">
-            <a href="#works" data-stub>
-              <article class="pf-card">
-                <div class="pf-meta">
-                  <span>Mobile — 2023</span>
-                  <span class="pf-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span>
-                </div>
-                <div class="pf-wm"><span><svg class="i"><use href="#i-logo"/></svg><sup>®</sup></span></div>
-                <div class="pf-body">
-                  <h3>Pulse Health</h3>
-                  <p>A wellness app grounded in research, shipped end to end from concept to release.</p>
-                  <div class="pf-tags"><span class="chip">Mobile App</span><span class="chip">UX Research</span><span class="chip">Development</span></div>
-                </div>
-              </article>
-            </a>
-          </li>
-        </ul>
+        <ul class="pf-grid" id="pfGrid"></ul>
       </div>
     </section>
 
     <!-- ============ Services ============ -->
     <section id="services" class="svc">
       <div class="shell">
-        <p class="eyebrow rv" style="--ty:10px">Services</p>
-        <h2 class="svc-h2 lines"><span class="ln"><span style="--ld:120ms">What we do best</span></span></h2>
-        <ul class="svc-rows">
-          <li class="rv" style="--d:0ms">
-            <a class="svc-row" href="#development" data-stub>
-              <span class="svc-idx">01</span>
-              <h3>Software Development</h3>
-              <p class="svc-desc">Scalable web &amp; mobile products built to last.</p>
-              <span class="svc-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span>
-            </a>
-          </li>
-          <li class="rv" style="--d:80ms">
-            <a class="svc-row" href="#design" data-stub>
-              <span class="svc-idx">02</span>
-              <h3>Product Design</h3>
-              <p class="svc-desc">Interfaces that feel effortless and look sharp.</p>
-              <span class="svc-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span>
-            </a>
-          </li>
-          <li class="rv" style="--d:160ms">
-            <a class="svc-row" href="#qa" data-stub>
-              <span class="svc-idx">03</span>
-              <h3>Quality Assurance</h3>
-              <p class="svc-desc">Rigorous testing for flawless, confident releases.</p>
-              <span class="svc-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span>
-            </a>
-          </li>
-          <li class="rv" style="--d:240ms">
-            <a class="svc-row" href="#consulting" data-stub>
-              <span class="svc-idx">04</span>
-              <h3>Consulting</h3>
-              <p class="svc-desc">Strategy and direction for ambitious teams.</p>
-              <span class="svc-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span>
-            </a>
-          </li>
-        </ul>
+        <p class="eyebrow rv" style="--ty:10px" data-t="services.eyebrow">Services</p>
+        <h2 class="svc-h2 lines"><span class="ln"><span style="--ld:120ms" data-t="services.heading">What we do best</span></span></h2>
+        <ul class="svc-rows" id="svcRows"></ul>
       </div>
     </section>
 
@@ -767,26 +652,9 @@
     <section class="stats" aria-label="Studio statistics">
       <div class="shell">
         <div class="stats-panel rv">
-          <p class="eyebrow light">By the numbers</p>
-          <h2 class="stats-h2 lines"><span class="ln"><span style="--ld:120ms">Proof in the work, not the words.</span></span></h2>
-          <ul class="stats-grid">
-            <li class="rv" style="--d:0ms">
-              <div class="stat-num"><span class="num" data-value="150">0</span>+</div>
-              <p class="stat-lbl">Projects delivered</p>
-            </li>
-            <li class="rv" style="--d:90ms">
-              <div class="stat-num"><span class="num" data-value="98">0</span>%</div>
-              <p class="stat-lbl">Client retention</p>
-            </li>
-            <li class="rv" style="--d:180ms">
-              <div class="stat-num"><span class="num" data-value="12">0</span></div>
-              <p class="stat-lbl">Years of craft</p>
-            </li>
-            <li class="rv" style="--d:270ms">
-              <div class="stat-num"><span class="num" data-value="40">0</span>+</div>
-              <p class="stat-lbl">Team members</p>
-            </li>
-          </ul>
+          <p class="eyebrow light" data-t="stats.eyebrow">By the numbers</p>
+          <h2 class="stats-h2 lines"><span class="ln"><span style="--ld:120ms" data-t="stats.heading">Proof in the work, not the words.</span></span></h2>
+          <ul class="stats-grid" id="statsGrid"></ul>
         </div>
       </div>
     </section>
@@ -801,72 +669,38 @@
           <span class="ln"><span style="--ld:100ms">Let&rsquo;s get to work.</span></span>
         </h2>
         <button class="pill has-arrow ur" data-nav="contact">
-          <span class="pill-in v-light">Start a project<span class="pill-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span></span>
+          <span class="pill-in v-light"><span data-t="footer.ctaButton">Start a project</span><span class="pill-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span></span>
         </button>
       </div>
-      <div class="ft-cols">
+      <div class="ft-cols" id="ftCols">
         <div class="ft-col">
-          <p class="ft-brand"><svg class="i"><use href="#i-logo"/></svg>Lumora</p>
-          <p class="ft-tag">An independent studio crafting brands, products, and the systems that connect them.</p>
-        </div>
-        <div class="ft-col">
-          <h4>Company</h4>
-          <ul>
-            <li><a class="alink" href="#about"><span>About</span></a></li>
-            <li><a class="alink" href="#careers"><span>Careers</span></a></li>
-            <li><a class="alink" href="#partners"><span>Partners</span></a></li>
-            <li><a class="alink" href="#contact"><span>Contact</span></a></li>
-          </ul>
-        </div>
-        <div class="ft-col">
-          <h4>Services</h4>
-          <ul>
-            <li><a class="alink" href="#development"><span>Development</span></a></li>
-            <li><a class="alink" href="#design"><span>Design</span></a></li>
-            <li><a class="alink" href="#qa"><span>Quality Assurance</span></a></li>
-            <li><a class="alink" href="#consulting"><span>Consulting</span></a></li>
-          </ul>
-        </div>
-        <div class="ft-col">
-          <h4>Social</h4>
-          <ul>
-            <li><a class="alink" href="#twitter"><span>X / Twitter</span></a></li>
-            <li><a class="alink" href="#behance"><span>Behance</span></a></li>
-            <li><a class="alink" href="#dribbble"><span>Dribbble</span></a></li>
-            <li><a class="alink" href="#linkedin"><span>LinkedIn</span></a></li>
-          </ul>
+          <p class="ft-brand"><svg class="i"><use href="#i-logo"/></svg><span data-t="brand">QHSE Digital Hub</span></p>
+          <p class="ft-tag" data-t="footer.tagline">An independent studio crafting brands, products, and the systems that connect them.</p>
         </div>
       </div>
       <div class="ft-legal">
-        <p>© 2025 Lumora Studio. All rights reserved.</p>
+        <p data-t="footer.legal">© 2025 QHSE Digital Hub. All rights reserved.</p>
         <div class="ft-legal-links">
-          <a class="alink sm" href="#privacy"><span>Privacy</span></a>
-          <a class="alink sm" href="#terms"><span>Terms</span></a>
+          <a class="alink sm" href="#privacy"><span data-t="footer.privacy">Privacy</span></a>
+          <a class="alink sm" href="#terms"><span data-t="footer.terms">Terms</span></a>
         </div>
       </div>
     </div>
-    <div class="ft-wm" aria-hidden="true">LUMORA</div>
+    <div class="ft-wm" aria-hidden="true" data-t="watermark">QHSE</div>
   </footer>
 
   <!-- ============ NavMenu overlay ============ -->
   <div class="navmenu" id="navMenu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
     <div class="shell nm-top">
-      <p class="nm-brand"><svg class="i"><use href="#i-logo"/></svg>Lumora</p>
+      <p class="nm-brand"><svg class="i"><use href="#i-logo"/></svg><span data-t="brand">QHSE Digital Hub</span></p>
       <button class="nm-close" id="nmClose"><svg class="i"><use href="#i-x"/></svg>Close</button>
     </div>
     <nav class="shell nm-nav" aria-label="Menu">
-      <ul>
-        <li><button class="nm-item" data-nav="home" style="--i:0"><span class="nm-idx">01</span><span class="nm-label">Home</span></button></li>
-        <li><button class="nm-item" data-nav="works" style="--i:1"><span class="nm-idx">02</span><span class="nm-label">Work</span></button></li>
-        <li><button class="nm-item" data-nav="services" style="--i:2"><span class="nm-idx">03</span><span class="nm-label">Services</span></button></li>
-        <li><button class="nm-item" data-nav="about" style="--i:3"><span class="nm-idx">04</span><span class="nm-label">Studio</span></button></li>
-        <li><button class="nm-item" data-nav="careers" style="--i:4"><span class="nm-idx">05</span><span class="nm-label">Careers</span></button></li>
-        <li><button class="nm-item" data-nav="contact" style="--i:5"><span class="nm-idx">06</span><span class="nm-label">Contact</span></button></li>
-      </ul>
+      <ul id="nmList"></ul>
     </nav>
     <div class="shell nm-bottom">
       <span>Local time — <span id="nmTime">9:41am</span></span>
-      <button class="nm-start" id="nmStart">Start a project →</button>
+      <button class="nm-start" id="nmStart"><span data-t="footer.ctaButton">Start a project</span> →</button>
     </div>
   </div>
 
@@ -876,33 +710,33 @@
       <button class="modal-x" id="modalClose" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button>
       <div class="modal-form" id="modalFormState">
         <div class="modal-head">
-          <p class="modal-eyebrow">Start a project</p>
-          <h2>Tell us what you&rsquo;re building.</h2>
+          <p class="modal-eyebrow" data-t="modal.eyebrow">Start a project</p>
+          <h2 data-t="modal.heading">Tell us what you&rsquo;re building.</h2>
         </div>
         <form id="requestForm">
-          <label>Name
-            <input type="text" name="name" required placeholder="Your name" />
+          <label><span data-t="modal.fields.name">Name</span>
+            <input type="text" name="name" required placeholder="Your name" data-t-ph="modal.fields.namePh" />
           </label>
-          <label>Email
-            <input type="email" name="email" required placeholder="you@company.com" />
+          <label><span data-t="modal.fields.email">Email</span>
+            <input type="email" name="email" required placeholder="you@company.com" data-t-ph="modal.fields.emailPh" />
           </label>
-          <label>Project
-            <textarea name="project" rows="4" required placeholder="A few words about your project, timeline, and budget."></textarea>
+          <label><span data-t="modal.fields.project">Project</span>
+            <textarea name="project" rows="4" required placeholder="A few words about your project, timeline, and budget." data-t-ph="modal.fields.projectPh"></textarea>
           </label>
           <div class="modal-foot">
-            <p class="modal-note">We reply within one business day.</p>
+            <p class="modal-note" data-t="modal.note">We reply within one business day.</p>
             <button class="pill has-arrow ur" type="submit">
-              <span class="pill-in v-dark"><span id="sendLabel">Send request</span><span class="pill-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span></span>
+              <span class="pill-in v-dark"><span id="sendLabel" data-t="modal.send">Send request</span><span class="pill-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span></span>
             </button>
           </div>
         </form>
       </div>
       <div class="modal-success" id="modalSuccessState" hidden>
         <span class="badge"><svg class="i"><use href="#i-logo"/></svg></span>
-        <h2>Request received</h2>
-        <p>Thanks for reaching out — we&rsquo;ll get back to you within one business day.</p>
+        <h2 data-t="modal.success.heading">Request received</h2>
+        <p data-t="modal.success.body">Thanks for reaching out — we&rsquo;ll get back to you within one business day.</p>
         <button class="pill" id="successClose">
-          <span class="pill-in v-dark">Close</span>
+          <span class="pill-in v-dark" data-t="modal.success.close">Close</span>
         </button>
       </div>
     </div>
@@ -960,6 +794,169 @@
     }
     applyAdaptiveGrid();
     addEventListener('resize', applyAdaptiveGrid);
+
+    /* ==================================================================
+       SITE CONTENT — every string on the page lives here. Edit this
+       object to rebrand or rewrite copy; the markup below is only
+       structure plus no-JS fallback text.
+       ================================================================== */
+    const SITE = {
+      brand: 'QHSE Digital Hub',
+      watermark: 'QHSE',
+      tagline: 'Bold ideas, shipped with quiet precision.',
+      nav: [
+        { label: 'Home',     target: 'home', current: true },
+        { label: 'Work',     target: 'works' },
+        { label: 'Services', target: 'services', caret: true },
+        { label: 'Studio',   target: 'about' },
+        { label: 'Careers',  target: 'careers' },
+        { label: 'Contact',  target: 'contact' }
+      ],
+      hero: {
+        eyebrow: 'Independent Studio',
+        lines: ['Bold ideas,', 'shipped with', 'quiet precision'],
+        rating: '200+ brands shipped',
+        ctaPrimary: 'Let’s Talk',
+        ctaSecondary: 'View Work',
+        trustedBy: 'Trusted by',
+        partners: ['Kaido', 'Northpeak', 'Vellum', 'Orbit', 'Brightline', 'Cobalt', 'Mesa'],
+        status: { left: 'Working since 2014', mid: 'Remote-first, worldwide', right: 'Scroll to explore' }
+      },
+      carousel: [
+        { caption: 'Conversion design', title: 'Crafted to convert.' },
+        { caption: 'Engineering',       title: 'Built to scale.' },
+        { caption: 'Brand systems',     title: 'Designed to last.' }
+      ],
+      about: {
+        eyebrow: 'The Studio',
+        timezone: 'A distributed team building across every time zone.',
+        statement1: 'We partner with ambitious teams to ship',
+        statement2: 'digital products, brand systems, and the strategy that holds them together.',
+        findUs: 'Find us online',
+        cta: 'About Us'
+      },
+      create: { a: 'We', b: 'Build', c: 'Better' },
+      portfolio: {
+        eyebrow: 'Portfolio',
+        heading: 'Selected Work',
+        items: [
+          { name: 'Aster Labs',   category: 'Branding', year: '2025', desc: 'A complete identity and go-to-market system for a fast-moving research startup.', tags: ['Branding', 'Strategy', 'Design'] },
+          { name: 'Nova Finance', category: 'Product',  year: '2024', desc: 'A finance platform reimagined — clear data, calm interfaces, and effortless flows.', tags: ['Product Design', 'Web App', 'QA'] },
+          { name: 'Helio Studio', category: 'Identity', year: '2023', desc: 'A bold visual identity and art direction system built to scale across every surface.', tags: ['Brand Identity', 'Art Direction'] },
+          { name: 'Pulse Health', category: 'Mobile',   year: '2023', desc: 'A wellness app grounded in research, shipped end to end from concept to release.', tags: ['Mobile App', 'UX Research', 'Development'] }
+        ]
+      },
+      services: {
+        eyebrow: 'Services',
+        heading: 'What we do best',
+        items: [
+          { title: 'Software Development', desc: 'Scalable web & mobile products built to last.',        href: '#development' },
+          { title: 'Product Design',       desc: 'Interfaces that feel effortless and look sharp.',      href: '#design' },
+          { title: 'Quality Assurance',    desc: 'Rigorous testing for flawless, confident releases.',   href: '#qa' },
+          { title: 'Consulting',           desc: 'Strategy and direction for ambitious teams.',          href: '#consulting' }
+        ]
+      },
+      stats: {
+        eyebrow: 'By the numbers',
+        heading: 'Proof in the work, not the words.',
+        items: [
+          { value: 150, suffix: '+', label: 'Projects delivered' },
+          { value: 98,  suffix: '%', label: 'Client retention' },
+          { value: 12,  suffix: '',  label: 'Years of craft' },
+          { value: 40,  suffix: '+', label: 'Team members' }
+        ]
+      },
+      footer: {
+        ctaLines: ['Have a project in mind?', 'Let’s get to work.'],
+        ctaButton: 'Start a project',
+        tagline: 'An independent studio crafting brands, products, and the systems that connect them.',
+        columns: [
+          { title: 'Company',  links: [['About', '#about'], ['Careers', '#careers'], ['Partners', '#partners'], ['Contact', '#contact']] },
+          { title: 'Services', links: [['Development', '#development'], ['Design', '#design'], ['Quality Assurance', '#qa'], ['Consulting', '#consulting']] },
+          { title: 'Social',   links: [['X / Twitter', '#twitter'], ['Behance', '#behance'], ['Dribbble', '#dribbble'], ['LinkedIn', '#linkedin']] }
+        ],
+        legal: '© 2025 QHSE Digital Hub. All rights reserved.',
+        privacy: 'Privacy',
+        terms: 'Terms'
+      },
+      modal: {
+        eyebrow: 'Start a project',
+        heading: 'Tell us what you’re building.',
+        fields: {
+          name: 'Name',       namePh: 'Your name',
+          email: 'Email',     emailPh: 'you@company.com',
+          project: 'Project', projectPh: 'A few words about your project, timeline, and budget.'
+        },
+        note: 'We reply within one business day.',
+        send: 'Send request',
+        sending: 'Sending…',
+        success: {
+          heading: 'Request received',
+          body: 'Thanks for reaching out — we’ll get back to you within one business day.',
+          close: 'Close'
+        }
+      }
+    };
+
+    /* ============ Content hydration ============ */
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    function renderContent(){
+      const get = path => path.split('.').reduce((o, k) => (o == null ? o : o[k]), SITE);
+      document.querySelectorAll('[data-t]').forEach(el => {
+        const v = get(el.dataset.t);
+        if (typeof v === 'string') el.textContent = v;
+      });
+      document.querySelectorAll('[data-t-ph]').forEach(el => {
+        const v = get(el.dataset.tPh);
+        if (typeof v === 'string') el.setAttribute('placeholder', v);
+      });
+      document.querySelectorAll('.hero-h1 .ln > span').forEach((el, i) => { if (SITE.hero.lines[i]) el.textContent = SITE.hero.lines[i]; });
+      document.querySelectorAll('.ft-h2 .ln > span').forEach((el, i) => { if (SITE.footer.ctaLines[i]) el.textContent = SITE.footer.ctaLines[i]; });
+
+      document.getElementById('hdrNavList').innerHTML = SITE.nav.map(n =>
+        `<li><button data-nav="${esc(n.target)}"${n.current ? ' aria-current="page"' : ''}><span class="nav-label">${esc(n.label)}${n.caret ? '<span class="caret">▾</span>' : ''}</span></button></li>`
+      ).join('');
+
+      document.getElementById('nmList').innerHTML = SITE.nav.map((n, i) =>
+        `<li><button class="nm-item" data-nav="${esc(n.target)}" style="--i:${i}"><span class="nm-idx">${String(i + 1).padStart(2, '0')}</span><span class="nm-label">${esc(n.label)}</span></button></li>`
+      ).join('');
+
+      document.getElementById('partnersList').innerHTML = SITE.hero.partners.map(p =>
+        `<li><span class="partner"><svg class="i"><use href="#i-dot"/></svg>${esc(p)}</span></li>`
+      ).join('');
+
+      document.getElementById('hcDots').innerHTML = SITE.carousel.map((_, i) =>
+        `<span class="hc-dot${i === 0 ? ' active' : ''}"></span>`
+      ).join('');
+
+      document.getElementById('pfGrid').innerHTML = SITE.portfolio.items.map((it, i) =>
+        `<li class="rv" style="--d:${i * 90}ms"><a href="#works" data-stub><article class="pf-card">
+          <div class="pf-meta"><span>${esc(it.category)} — ${esc(it.year)}</span><span class="pf-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span></div>
+          <div class="pf-wm"><span><svg class="i"><use href="#i-logo"/></svg><sup>®</sup></span></div>
+          <div class="pf-body"><h3>${esc(it.name)}</h3><p>${esc(it.desc)}</p>
+            <div class="pf-tags">${it.tags.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div></div>
+        </article></a></li>`
+      ).join('');
+
+      document.getElementById('svcRows').innerHTML = SITE.services.items.map((it, i) =>
+        `<li class="rv" style="--d:${i * 80}ms"><a class="svc-row" href="${esc(it.href)}" data-stub>
+          <span class="svc-idx">${String(i + 1).padStart(2, '0')}</span><h3>${esc(it.title)}</h3>
+          <p class="svc-desc">${esc(it.desc)}</p>
+          <span class="svc-badge"><svg class="i"><use href="#i-arrow-ur"/></svg></span></a></li>`
+      ).join('');
+
+      document.getElementById('statsGrid').innerHTML = SITE.stats.items.map((it, i) =>
+        `<li class="rv" style="--d:${i * 90}ms"><div class="stat-num"><span class="num" data-value="${esc(it.value)}">0</span>${esc(it.suffix)}</div><p class="stat-lbl">${esc(it.label)}</p></li>`
+      ).join('');
+
+      document.getElementById('ftCols').insertAdjacentHTML('beforeend', SITE.footer.columns.map(col =>
+        `<div class="ft-col"><h4>${esc(col.title)}</h4><ul>${col.links.map(([label, href]) =>
+          `<li><a class="alink" href="${esc(href)}"><span>${esc(label)}</span></a></li>`).join('')}</ul></div>`
+      ).join(''));
+
+      document.title = SITE.brand + ' — Independent Design & Engineering Studio';
+    }
+    renderContent();
 
     /* ============ Word-reveal splitting ============ */
     document.querySelectorAll('.words').forEach(root => {
@@ -1142,19 +1139,15 @@
     })();
 
     /* ============ Hero carousel ============ */
-    const hcItems = [
-      { c: 'Conversion design', t: 'Crafted to convert.' },
-      { c: 'Engineering',       t: 'Built to scale.' },
-      { c: 'Brand systems',     t: 'Designed to last.' }
-    ];
+    const hcItems = SITE.carousel;
     const hcSlot = document.getElementById('hcSlot');
     const hcDots = [...document.getElementById('hcDots').children];
     let hcIdx = 0, hcCurrent = null;
     function hcRender(i){
       const d = document.createElement('div');
       d.className = 'hc-item';
-      const cap = document.createElement('div'); cap.className = 'hc-cap'; cap.textContent = hcItems[i].c;
-      const ttl = document.createElement('div'); ttl.className = 'hc-title'; ttl.textContent = hcItems[i].t;
+      const cap = document.createElement('div'); cap.className = 'hc-cap'; cap.textContent = hcItems[i].caption;
+      const ttl = document.createElement('div'); ttl.className = 'hc-title'; ttl.textContent = hcItems[i].title;
       d.append(cap, ttl);
       return d;
     }
@@ -1284,7 +1277,7 @@
         startScroll();
         setTimeout(() => {
           requestForm.reset();
-          sendLabel.textContent = 'Send request';
+          sendLabel.textContent = SITE.modal.send;
           successState.hidden = true;
           formState.hidden = false;
         }, 300);
@@ -1298,7 +1291,7 @@
       e.preventDefault();
       if (sending) return;
       sending = true;
-      sendLabel.textContent = 'Sending…';
+      sendLabel.textContent = SITE.modal.sending;
       setTimeout(() => {
         sending = false;
         formState.hidden = true;

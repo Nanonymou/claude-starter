@@ -16,6 +16,16 @@ This is a human-curated log — not a mirror of `git log`.
   overlays (nav menu, request modal) now manage keyboard focus properly:
   focus moves into the dialog on open, Tab/Shift-Tab are trapped inside it,
   and focus is restored to the triggering control on close.
+- **Standalone `index.html` — rebranded to "QHSE Digital Hub" + content
+  centralised** — all page copy now lives in a single `SITE` config object at
+  the top of the module script (brand, watermark, nav, hero, carousel, about,
+  portfolio, services, stats, footer, modal). Singular strings hydrate into
+  `data-t`/`data-t-ph` slots (markup text remains as no-JS fallback);
+  repeated collections (header/menu nav, partners, carousel dots, portfolio
+  cards, service rows, stats, footer link columns) are generated from the
+  config into empty containers. Editing content is now a one-place change;
+  the giant watermark uses its own `SITE.watermark` key ("QHSE") since the
+  full brand name would overflow at 13rem.
 - **Standalone `index.html` — request form validation fixed** — runtime
   verification caught that the request form carried `novalidate`, which let a
   completely empty submit reach the success state despite every field being
