@@ -10,6 +10,14 @@ This is a human-curated log — not a mirror of `git log`.
 
 ## 2026-07-14
 
+- **Standalone page — portfolio cards link to the real apps + screenshot
+  slots** — each `SITE.portfolio.items` entry now supports `href` (the card
+  becomes a real link opening in a new tab with `rel="noopener"`) and `img`
+  (an app screenshot rendered edge-to-edge behind the card content with a
+  dark legibility gradient; a missing file falls back to the logo watermark
+  via `onerror`). All four cards are wired to their Apps Script / bolt.host
+  URLs; screenshots go in `standalone/assets/portfolio/` (see its README
+  for the expected filenames).
 - **Standalone page — TPB logo replaces spark tile + About globe** — new
   `#i-tpb` SVG symbol (PT Tiga Persada Benua mark: beveled red/blue/green
   triangle with "TPB" wordmark, transparent background, drawn as vectors so
