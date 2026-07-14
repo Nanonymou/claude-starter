@@ -1,12 +1,55 @@
 ---
 tags: [meta, changelog]
-updated: 2026-06-07
+updated: 2026-07-14
 ---
 
 # Changelog
 
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
+
+## 2026-07-14
+
+- **Standalone page moved to `standalone/index.html` for Vercel deploys** —
+  the repo root is the Next.js app, so Vercel's Next.js build would never
+  serve a root-level `index.html`. The standalone page now lives in
+  `standalone/` and deploys as its own static Vercel project: New Project →
+  import this repo → Root Directory `standalone` → Framework Preset "Other"
+  (no build command). Pushes to the connected branch auto-deploy.
+- **Standalone `index.html` — PR #1 review fixes** — the stats count-up now
+  performs a trailing update after its 30ms throttle so the final scroll frame
+  can never leave a counter short of its target, and both `aria-modal`
+  overlays (nav menu, request modal) now manage keyboard focus properly:
+  focus moves into the dialog on open, Tab/Shift-Tab are trapped inside it,
+  and focus is restored to the triggering control on close — for the modal,
+  only after its closing transition completes and the dialog is hidden
+  (second review pass), matching the menu's sequence.
+- **Standalone `index.html` — rebranded to "QHSE Digital Hub" + content
+  centralised** — all page copy now lives in a single `SITE` config object at
+  the top of the module script (brand, watermark, nav, hero, carousel, about,
+  portfolio, services, stats, footer, modal). Singular strings hydrate into
+  `data-t`/`data-t-ph` slots (markup text remains as no-JS fallback);
+  repeated collections (header/menu nav, partners, carousel dots, portfolio
+  cards, service rows, stats, footer link columns) are generated from the
+  config into empty containers. Editing content is now a one-place change;
+  the giant watermark uses its own `SITE.watermark` key ("QHSE") since the
+  full brand name would overflow at 13rem.
+- **Standalone `index.html` — request form validation fixed** — runtime
+  verification caught that the request form carried `novalidate`, which let a
+  empty submission reach the success state despite every field being
+  `required`. Removed `novalidate` so native browser validation blocks
+  empty/partial/malformed submissions with the standard messages.
+
+## 2026-07-13
+
+- **Standalone `index.html` added at the repo root** — a self-contained,
+  single-file recreation of the "Lumora — Independent Design & Engineering
+  Studio" landing page (pure HTML/CSS/JS, no build step). It deliberately does
+  **not** use the Next.js app, the vendored spring engine, or Tailwind: the
+  only dependency is Lenis, loaded via a CDN importmap; spring/text reveals are
+  reproduced with CSS transitions and a canvas-based "liquid" cursor-reveal
+  hero. It is not wired into `src/` or the App Router and does not affect
+  `yarn dev`/`yarn build`.
 
 ## 2026-06-07
 
