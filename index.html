@@ -1269,12 +1269,12 @@
       modalOpen = false;
       modal.classList.remove('open');
       modal.classList.add('closing');
-      restoreFocus(modalOpener);
-      modalOpener = null;
       setTimeout(() => {
         modal.classList.remove('closing');
         modal.hidden = true;
         startScroll();
+        restoreFocus(modalOpener);
+        modalOpener = null;
         setTimeout(() => {
           requestForm.reset();
           sendLabel.textContent = SITE.modal.send;

@@ -28,7 +28,7 @@ This is a human-curated log — not a mirror of `git log`.
   full brand name would overflow at 13rem.
 - **Standalone `index.html` — request form validation fixed** — runtime
   verification caught that the request form carried `novalidate`, which let a
-  completely empty submit reach the success state despite every field being
+  empty submission reach the success state despite every field being
   `required`. Removed `novalidate` so native browser validation blocks
   empty/partial/malformed submissions with the standard messages.
 
