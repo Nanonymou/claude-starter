@@ -10,6 +10,12 @@ This is a human-curated log — not a mirror of `git log`.
 
 ## 2026-07-14
 
+- **Standalone page — TPB logo replaces spark tile + About globe** — new
+  `#i-tpb` SVG symbol (PT Tiga Persada Benua mark: beveled red/blue/green
+  triangle with "TPB" wordmark, transparent background, drawn as vectors so
+  it stays crisp at any size). Used in the hero carousel tile (now a white
+  tile with a hairline ring instead of the black spark tile) and as the
+  large About-section background mark, replacing the Globe icon there.
 - **Standalone page — typographic hero + live-site hotfix** — the hero's
   external photos (getlayers.ai) are replaced by generated inline SVG art:
   stacked "QHSE / DIGITAL / HUB" editorial type (alche.studio reference),

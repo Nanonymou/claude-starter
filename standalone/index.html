@@ -170,8 +170,8 @@
     @media (min-width:1024px){ .hero-card{ width:19rem } }
     .hc-row{ display:flex; gap:.5rem; cursor:pointer; border-radius:.875rem }
     .hc-tile{ aspect-ratio:1; width:6rem; display:grid; place-items:center; border-radius:.875rem;
-      background:#0a0a0a; font-size:1.875rem; color:#fff; flex:none }
-    .hc-tile .i{ color:#cf8047 }
+      background:#fff; box-shadow:0 0 0 1px #e6e5e2; font-size:1.875rem; flex:none }
+    .hc-tile .i{ font-size:4.25rem }
     .hc-panel{ flex:1; border-radius:.875rem; background:rgba(241,240,238,.7); padding:.75rem;
       display:flex; flex-direction:column; justify-content:space-between }
     .hc-slot{ position:relative; min-height:3.25rem }
@@ -480,6 +480,13 @@
     <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 4l16 16M20 4 4 20"/></symbol>
     <symbol id="i-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.2" fill="currentColor"/></symbol>
     <symbol id="i-grid" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <!-- PT Tiga Persada Benua mark: beveled tri-band triangle, transparent background -->
+    <symbol id="i-tpb" viewBox="0 0 1000 1000">
+      <polygon fill="#e0181f" points="500,70 70,930 215,860 500,330"/>
+      <polygon fill="#1e4fe0" points="500,70 930,930 785,860 500,330"/>
+      <polygon fill="#52c41a" points="70,930 930,930 785,860 215,860"/>
+      <text x="500" y="830" font-size="150" font-weight="700" fill="#111111" text-anchor="middle" font-family="'Onest','Helvetica Neue',Arial,sans-serif">TPB</text>
+    </symbol>
   </svg>
 
   <a class="skip" href="#main">Skip to content</a>
@@ -558,7 +565,7 @@
         <div class="hero-right">
           <div class="hero-card rv" style="--d:400ms" data-gate>
             <div class="hc-row" id="hcRow" role="button" tabindex="0" aria-label="Next highlight">
-              <div class="hc-tile"><svg class="i"><use href="#i-logo"/></svg></div>
+              <div class="hc-tile"><svg class="i"><use href="#i-tpb"/></svg></div>
               <div class="hc-panel">
                 <div class="hc-slot" id="hcSlot" aria-live="polite"></div>
                 <div class="hc-ctrl">
@@ -592,7 +599,7 @@
     <section id="about" class="about">
       <div class="shell">
         <div class="about-globe">
-          <svg class="i bg-globe" aria-hidden="true"><use href="#i-globe"/></svg>
+          <svg class="i bg-globe" aria-hidden="true"><use href="#i-tpb"/></svg>
           <p class="eyebrow" data-t="about.eyebrow">The Studio</p>
           <div class="about-tz rv">
             <svg class="i"><use href="#i-globe"/></svg>
