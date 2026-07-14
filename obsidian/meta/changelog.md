@@ -1,12 +1,21 @@
 ---
 tags: [meta, changelog]
-updated: 2026-07-13
+updated: 2026-07-14
 ---
 
 # Changelog
 
 Chronological log of notable changes to the project. Newest first.
 This is a human-curated log — not a mirror of `git log`.
+
+## 2026-07-14
+
+- **Standalone `index.html` — PR #1 review fixes** — the stats count-up now
+  performs a trailing update after its 30ms throttle so the final scroll frame
+  can never leave a counter short of its target, and both `aria-modal`
+  overlays (nav menu, request modal) now manage keyboard focus properly:
+  focus moves into the dialog on open, Tab/Shift-Tab are trapped inside it,
+  and focus is restored to the triggering control on close.
 
 ## 2026-07-13
 

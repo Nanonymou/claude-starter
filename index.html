@@ -1185,10 +1185,16 @@
 
     /* ============ Stats count-up ============ */
     const statNums = [...document.querySelectorAll('.stat-num .num')];
-    let statsLast = 0;
+    let statsLast = 0, statsTrailing = null;
     function updateStats(){
       const now = performance.now();
-      if (now - statsLast < 30) return;
+      if (now - statsLast < 30){
+        /* trailing call so the final scroll frame is never dropped */
+        if (statsTrailing === null){
+          statsTrailing = setTimeout(() => { statsTrailing = null; updateStats(); }, 35);
+        }
+        return;
+      }
       statsLast = now;
       const vh = window.innerHeight;
       statNums.forEach(el => {
@@ -1203,14 +1209,36 @@
     addEventListener('resize', updateStats);
     updateStats();
 
+    /* ============ Focus management for overlays ============ */
+    function focusables(container){
+      return [...container.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )].filter(el => el.offsetParent !== null);
+    }
+    function trapTab(container, e){
+      const els = focusables(container);
+      if (!els.length) return;
+      const first = els[0], last = els[els.length - 1];
+      if (e.shiftKey && (document.activeElement === first || !container.contains(document.activeElement))){
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && (document.activeElement === last || !container.contains(document.activeElement))){
+        e.preventDefault(); first.focus();
+      }
+    }
+    function restoreFocus(el){
+      if (el && document.contains(el)) el.focus();
+    }
+
     /* ============ NavMenu ============ */
     const navMenu = document.getElementById('navMenu');
-    let menuOpen = false;
+    let menuOpen = false, menuOpener = null;
     function openMenu(){
       menuOpen = true;
+      menuOpener = document.activeElement;
       navMenu.hidden = false;
       stopScroll();
       requestAnimationFrame(() => requestAnimationFrame(() => navMenu.classList.add('open')));
+      document.getElementById('nmClose').focus();
     }
     function closeMenu(cb){
       menuOpen = false;
@@ -1218,6 +1246,8 @@
       setTimeout(() => {
         navMenu.hidden = true;
         startScroll();
+        restoreFocus(menuOpener);
+        menuOpener = null;
         if (cb) cb();
       }, 450);
     }
@@ -1232,17 +1262,22 @@
     const successState = document.getElementById('modalSuccessState');
     const requestForm = document.getElementById('requestForm');
     const sendLabel = document.getElementById('sendLabel');
-    let modalOpen = false, sending = false;
+    let modalOpen = false, sending = false, modalOpener = null;
     function openModal(){
       modalOpen = true;
+      modalOpener = document.activeElement;
       modal.hidden = false;
       stopScroll();
       requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('open')));
+      const first = focusables(modalPanel).find(el => !el.classList.contains('modal-x'));
+      (first || modalPanel.querySelector('.modal-x')).focus();
     }
     function closeModal(){
       modalOpen = false;
       modal.classList.remove('open');
       modal.classList.add('closing');
+      restoreFocus(modalOpener);
+      modalOpener = null;
       setTimeout(() => {
         modal.classList.remove('closing');
         modal.hidden = true;
@@ -1271,11 +1306,17 @@
       }, 700);
     });
 
-    /* ============ Escape handling ============ */
+    /* ============ Escape / Tab handling for overlays ============ */
     addEventListener('keydown', e => {
-      if (e.key !== 'Escape') return;
-      if (modalOpen) closeModal();
-      else if (menuOpen) closeMenu();
+      if (e.key === 'Escape'){
+        if (modalOpen) closeModal();
+        else if (menuOpen) closeMenu();
+        return;
+      }
+      if (e.key === 'Tab'){
+        if (modalOpen) trapTab(modalPanel, e);
+        else if (menuOpen) trapTab(navMenu, e);
+      }
     });
 
     /* ============ Navigation routing ============ */
