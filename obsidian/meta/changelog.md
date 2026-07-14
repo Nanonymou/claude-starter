@@ -10,6 +10,12 @@ This is a human-curated log — not a mirror of `git log`.
 
 ## 2026-07-14
 
+- **Standalone page moved to `standalone/index.html` for Vercel deploys** —
+  the repo root is the Next.js app, so Vercel's Next.js build would never
+  serve a root-level `index.html`. The standalone page now lives in
+  `standalone/` and deploys as its own static Vercel project: New Project →
+  import this repo → Root Directory `standalone` → Framework Preset "Other"
+  (no build command). Pushes to the connected branch auto-deploy.
 - **Standalone `index.html` — PR #1 review fixes** — the stats count-up now
   performs a trailing update after its 30ms throttle so the final scroll frame
   can never leave a counter short of its target, and both `aria-modal`

@@ -5,7 +5,10 @@ description: Build/launch/drive recipe for verifying changes in this repo (stand
 
 # Verifying changes in this repo
 
-## Standalone `index.html` (repo root)
+## Standalone `standalone/index.html`
+
+Lives in `standalone/` so it can be deployed as its own static Vercel
+project (Root Directory = `standalone`, Framework Preset = "Other").
 
 It is a self-contained page whose only runtime dependency is Lenis from
 unpkg. The sandbox proxy **blocks unpkg.com, fonts.googleapis.com /
