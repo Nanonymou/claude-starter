@@ -10,6 +10,17 @@ This is a human-curated log — not a mirror of `git log`.
 
 ## 2026-07-14
 
+- **Standalone page — typographic hero + live-site hotfix** — the hero's
+  external photos (getlayers.ai) are replaced by generated inline SVG art:
+  stacked "QHSE / DIGITAL / HUB" editorial type (alche.studio reference),
+  outlined on the light base layer and accent-filled on the dark layer the
+  cursor brush reveals. Art is built at runtime from `SITE.heroArt.lines`,
+  so it follows the config; the page now has zero external image
+  dependencies and the liquid canvas is no longer CORS-tainted. Also fixes
+  a breaking syntax error introduced by a manual GitHub edit
+  (`value: 3.000.000` — invalid JS number) that froze the deployed site at
+  the loader; stat values are plain integers again and the count-up now
+  renders id-ID thousands grouping ("3.000.000").
 - **Standalone page moved to `standalone/index.html` for Vercel deploys** —
   the repo root is the Next.js app, so Vercel's Next.js build would never
   serve a root-level `index.html`. The standalone page now lives in

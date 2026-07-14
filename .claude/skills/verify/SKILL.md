@@ -11,9 +11,11 @@ Lives in `standalone/` so it can be deployed as its own static Vercel
 project (Root Directory = `standalone`, Framework Preset = "Other").
 
 It is a self-contained page whose only runtime dependency is Lenis from
-unpkg. The sandbox proxy **blocks unpkg.com, fonts.googleapis.com /
-fonts.gstatic.com, and api.getlayers.ai**, so drive it with Playwright and
-route-stub those hosts.
+unpkg. The sandbox proxy **blocks unpkg.com and fonts.googleapis.com /
+fonts.gstatic.com**, so drive it with Playwright and route-stub those
+hosts. Hero art is generated inline SVG (from `SITE.heroArt`) — no image
+host to stub, and the liquid canvas is same-origin, so `getImageData`
+works for asserting painted pixels.
 
 ```bash
 # one-time: playwright-core in the scratchpad (plain `playwright` is not installed)
@@ -45,9 +47,8 @@ reopen must show a reset form; stats `.stat-num .num` must land exactly on
 their `data-value` after an instant jump past the panel (trailing throttle).
 
 Gotchas:
-- The liquid canvas is **tainted** by the cross-origin hero image —
-  `getImageData` throws `SecurityError`. That throw is itself evidence the
-  brush stamped cross-origin pixels; don't treat it as a failure.
+- The liquid canvas is same-origin (inline SVG hero art), so
+  `getImageData` works — assert painted pixels directly.
 - Under `reducedMotion: 'reduce'` the liquid init is skipped: the canvas
   stays at the **default 300×150** (not 0×0) and never resizes.
 - Adaptive grid: at 360px viewport the root font-size computes to 16px via
